@@ -22,4 +22,13 @@
 - 1; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())
 - SELECT \* FROM Produto where id = 1; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())
 
--
+# TesteTres
+
+- 1'; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate()) --
+
+- '; Insert into Teste (Descricao, DataCadastro)
+
+# TesteQuatro
+
+- '; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
+- SELECT \* FROM Produto where Descricao like '%'; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--%'"
