@@ -2342,11 +2342,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\POC\\Poc2\\Back\\API.csproj",
+      "projectUniqueName": "D:\\POC\\Poc2\\back\\API.csproj",
       "projectName": "API",
-      "projectPath": "d:\\POC\\Poc2\\Back\\API.csproj",
+      "projectPath": "D:\\POC\\Poc2\\back\\API.csproj",
       "packagesPath": "C:\\Users\\guyll\\.nuget\\packages\\",
-      "outputPath": "d:\\POC\\Poc2\\Back\\obj\\",
+      "outputPath": "D:\\POC\\Poc2\\back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\guyll\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -102,7 +102,6 @@ public class ProdutoRepository : IProdutoRepository
             con.Open();
             var query = $"SELECT * FROM Produto where Descricao like '%" + request.Query + "%'";
             produtos = con.Query<Produto>(query).ToList();
-
         }
         catch (Exception ex)
         {
