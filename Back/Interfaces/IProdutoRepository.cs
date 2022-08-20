@@ -9,4 +9,6 @@ public interface IProdutoRepository
     Task<IEnumerable<Produto>> TesteDois(string request);
     Task<IEnumerable<Produto>> TesteTres(string request);
     Task<IEnumerable<Produto>> TesteQuatro(QueryStringParameters request);
+    Task<IEnumerable<Produto>> TesteCinco(string request);
+    Task<IEnumerable<Produto>> TesteSeis(string request);
 }

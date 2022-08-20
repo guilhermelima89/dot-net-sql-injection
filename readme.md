@@ -1,13 +1,19 @@
+# POC 2
+
+- (back-end ) POC abordando conceito de SQL Injection utilizando o dapper.
+
+By Guilherme Lima - guyga89@gmail.com
+
 # TesteUm
 
-- ' or ''='
-- SELECT \* FROM Produto where descricao = '' or ''=''
+- input: ' or ''='
+- resultado: SELECT \* FROM Produto where descricao = '' or ''=''
 
-- ' drop table Teste--
-- SELECT \* FROM Produto where descricao = '' drop table Teste--'
+- input: ' drop table Teste--
+- resultado: SELECT \* FROM Produto where descricao = '' drop table Teste--'
 
-- ' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
-- SELECT \* FROM Produto where descricao = '' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--'
+- input: ' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
+- resultado: SELECT \* FROM Produto where descricao = '' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--'
 
 # TesteDois
 

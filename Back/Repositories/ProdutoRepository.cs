@@ -114,4 +114,54 @@ public class ProdutoRepository : IProdutoRepository
 
         return produtos;
     }
+
+    public async Task<IEnumerable<Produto>> TesteCinco(string request)
+    {
+        var connectionString = this.GetConnection();
+        List<Produto> produtos = new List<Produto>();
+        await using var con = new SqlConnection(connectionString);
+
+        var parameters = new DynamicParameters();
+        parameters.Add("@descricao", request);
+
+        try
+        {
+            con.Open();
+            var query = $"SELECT * FROM Produto where Descricao = @descricao";
+            produtos = con.Query<Produto>(query, parameters).ToList();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        return produtos;
+    }
+    public async Task<IEnumerable<Produto>> TesteSeis(string request)
+    {
+        var connectionString = this.GetConnection();
+        List<Produto> produtos = new List<Produto>();
+        await using var con = new SqlConnection(connectionString);
+
+        try
+        {
+            con.Open();
+            var query = $"SELECT * FROM Produto where Descricao = @descricao";
+            produtos = con.Query<Produto>(query, new { descricao = request }).ToList();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        return produtos;
+    }
 }

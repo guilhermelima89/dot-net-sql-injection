@@ -15,12 +15,6 @@ public class ProdutoController : ControllerBase
         _produtoRepository = produtoRepository;
     }
 
-    [HttpGet]
-    public async Task<IEnumerable<Produto>> GetAll([FromQuery] QueryStringParameters request)
-    {
-        return await _produtoRepository.TesteQuatro(request);
-    }
-
     [HttpGet("teste-um")]
     public async Task<IEnumerable<Produto>> TesteUm([FromQuery] string request)
     {
@@ -37,5 +31,23 @@ public class ProdutoController : ControllerBase
     public async Task<IEnumerable<Produto>> TesteTres([FromQuery] string request)
     {
         return await _produtoRepository.TesteTres(request);
+    }
+
+    [HttpGet("teste-quatro")]
+    public async Task<IEnumerable<Produto>> TesteQuatro([FromQuery] QueryStringParameters request)
+    {
+        return await _produtoRepository.TesteQuatro(request);
+    }
+
+    [HttpGet("teste-cinco")]
+    public async Task<IEnumerable<Produto>> TesteCinco([FromQuery] string request)
+    {
+        return await _produtoRepository.TesteCinco(request);
+    }
+
+    [HttpGet("teste-seis")]
+    public async Task<IEnumerable<Produto>> TesteSeis([FromQuery] string request)
+    {
+        return await _produtoRepository.TesteSeis(request);
     }
 }
