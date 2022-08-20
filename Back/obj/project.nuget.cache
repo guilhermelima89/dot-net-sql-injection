@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jArdlPq0v6y4ckNX6XezDbZVNPi2coqVgxh9Crns+ysXEN4yIUxa1U/3ASL4ah+z28UggYM1qEDdyDXTjqHxGQ==",
+  "dgSpecHash": "XsqCh9DFt6zUSPTcyVQAOGxa8lyyuY0+GkQxvxFuY/gFGk/Jlk1Q4Tdh9naz45Gr6v3oqgprOKuxMUstxgnnzA==",
   "success": true,
-  "projectFilePath": "D:\\POC\\Poc2\\Back\\API.csproj",
+  "projectFilePath": "D:\\POC\\dot-net-sql-injection\\back\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\guyll\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\guyll\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

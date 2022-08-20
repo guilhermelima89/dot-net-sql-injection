@@ -2342,11 +2342,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\POC\\Poc2\\back\\API.csproj",
+      "projectUniqueName": "D:\\POC\\dot-net-sql-injection\\back\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\POC\\Poc2\\back\\API.csproj",
+      "projectPath": "D:\\POC\\dot-net-sql-injection\\back\\API.csproj",
       "packagesPath": "C:\\Users\\guyll\\.nuget\\packages\\",
-      "outputPath": "D:\\POC\\Poc2\\back\\obj\\",
+      "outputPath": "D:\\POC\\dot-net-sql-injection\\back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\guyll\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,40 +1,88 @@
-# POC 2
+# .NET DAPPER SQL INJECTION
 
-- (back-end ) POC abordando conceito de SQL Injection utilizando o dapper.
+## Back-End
 
-By Guilherme Lima - guyga89@gmail.com
+- Net 6
+- Dapper
+- Swagger
+
+#
+
+### POC abordando conceito de SQL Injection utilizando o dapper.
 
 # TesteUm
 
-- input: ' or ''='
-- resultado: SELECT \* FROM Produto where descricao = '' or ''=''
+```c#
+var query = "SELECT * FROM Produto where descricao = '" + request + "'";
+```
 
-- input: ' drop table Teste--
-- resultado: SELECT \* FROM Produto where descricao = '' drop table Teste--'
-
-- input: ' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
-- resultado: SELECT \* FROM Produto where descricao = '' Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--'
+- ' or 1=1--
+- ' or ''='
+- ' Insert into Teste (Descricao) Values ('testeUm')--
+- ' drop table Teste--
 
 # TesteDois
 
-- 1;drop table Teste--
-- 1;drop table Teste
-- SELECT \* FROM Produto where id = 1;drop table Teste
+```c#
+ var query = "SELECT * FROM Produto where id = " + request;
+```
 
 - 1 or 1=1
-- SELECT \* FROM Produto where id = 1 or 1=1
-
-- 1; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
-- 1; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())
-- SELECT \* FROM Produto where id = 1; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())
+- 1; Insert into Teste (Descricao) Values ('testeDois')--
+- 1; Insert into Teste (Descricao) Values ('testeDois')
+- 1;drop table Teste--
+- 1;drop table Teste
 
 # TesteTres
 
-- 1'; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate()) --
+```c#
+ var query = $"SELECT * FROM Produto where id = '{request}'";
+```
 
-- '; Insert into Teste (Descricao, DataCadastro)
+- ' or ''='
+- 1'; Insert into Teste (Descricao) Values ('testeTres') --
+- '; Insert into Teste (Descricao) Values ('testeTres') --
+- 1';drop table Teste--
 
 # TesteQuatro
 
-- '; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--
-- SELECT \* FROM Produto where Descricao like '%'; Insert into Teste (Descricao, DataCadastro) Values ('teste',getdate())--%'"
+```c#
+var query = $"SELECT * FROM Produto where Descricao like '%" + request.Query + "%'";
+```
+
+- '; Insert into Teste (Descricao) Values ('testeQuatro')--
+- ' or ''='
+
+# TesteCinco
+
+```c#
+var query = new StringBuilder();
+query.Append("SELECT * FROM Produto ");
+query.Append($"where id = '{request}'");
+```
+
+- ' or ''='
+- 1'; Insert into Teste (Descricao) Values ('testeTres') --
+- '; Insert into Teste (Descricao) Values ('testeTres') --
+- 1';drop table Teste--
+
+# TesteSeis
+
+```c#
+var query = $"SELECT * FROM Produto where Descricao = @descricao";
+produtos = con.Query<Produto>(query, new { descricao = request }).ToList();
+```
+
+- Seguro
+
+# TesteSete
+
+```c#
+var parameters = new DynamicParameters();
+parameters.Add("@descricao", request);
+
+var query = $"SELECT * FROM Produto where Descricao = @descricao";
+produtos = con.Query<Produto>(query, parameters).ToList();
+```
+
+- Seguro

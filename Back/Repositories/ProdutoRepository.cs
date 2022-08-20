@@ -1,3 +1,4 @@
+using System.Text;
 using Api.Interfaces;
 using Api.Models;
 using Api.Pagination;
@@ -34,7 +35,7 @@ public class ProdutoRepository : IProdutoRepository
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
         }
         finally
         {
@@ -58,7 +59,7 @@ public class ProdutoRepository : IProdutoRepository
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
         }
         finally
         {
@@ -82,7 +83,7 @@ public class ProdutoRepository : IProdutoRepository
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
         }
         finally
         {
@@ -105,7 +106,7 @@ public class ProdutoRepository : IProdutoRepository
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
         }
         finally
         {
@@ -121,18 +122,18 @@ public class ProdutoRepository : IProdutoRepository
         List<Produto> produtos = new List<Produto>();
         await using var con = new SqlConnection(connectionString);
 
-        var parameters = new DynamicParameters();
-        parameters.Add("@descricao", request);
-
         try
         {
             con.Open();
-            var query = $"SELECT * FROM Produto where Descricao = @descricao";
-            produtos = con.Query<Produto>(query, parameters).ToList();
+            var query = new StringBuilder();
+            query.Append("SELECT * FROM Produto ");
+            query.Append($"where id = '{request}'");
+
+            produtos = con.Query<Produto>(query.ToString()).ToList();
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
         }
         finally
         {
@@ -155,7 +156,34 @@ public class ProdutoRepository : IProdutoRepository
         }
         catch (Exception ex)
         {
-            throw ex;
+            throw new Exception(ex.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        return produtos;
+    }
+
+    public async Task<IEnumerable<Produto>> TesteSete(string request)
+    {
+        var connectionString = this.GetConnection();
+        List<Produto> produtos = new List<Produto>();
+        await using var con = new SqlConnection(connectionString);
+
+        var parameters = new DynamicParameters();
+        parameters.Add("@descricao", request);
+
+        try
+        {
+            con.Open();
+            var query = $"SELECT * FROM Produto where Descricao = @descricao";
+            produtos = con.Query<Produto>(query, parameters).ToList();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
         finally
         {
