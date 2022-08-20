@@ -6,17 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
-builder.Services.AddCors(options =>
-    {
-        options.AddPolicy("Production",
-            builder =>
-                builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithExposedHeaders("X-Pagination"));
-    });
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
