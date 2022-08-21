@@ -142,7 +142,55 @@ public class ProdutoRepository : IProdutoRepository
 
         return produtos;
     }
-    public async Task<IEnumerable<Produto>> TesteSeis(string request)
+    public async Task TesteSeis(string request, int id)
+    {
+        var connectionString = this.GetConnection();
+        await using var con = new SqlConnection(connectionString);
+
+        try
+        {
+            con.Open();
+            var query = $"update Produto set Descricao =  '{request}' WHERE ID = {id}";
+            con.Execute(query);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        return;
+    }
+
+    public async Task TesteSete(string request, string id)
+    {
+        var connectionString = this.GetConnection();
+        await using var con = new SqlConnection(connectionString);
+
+        try
+        {
+            con.Open();
+            var query = @$"update Produto 
+                            set Descricao =  '{request}' 
+                            WHERE ID = {id}";
+            con.Execute(query);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+        finally
+        {
+            con.Close();
+        }
+
+        return;
+    }
+
+    public async Task<IEnumerable<Produto>> TesteOito(string request)
     {
         var connectionString = this.GetConnection();
         List<Produto> produtos = new List<Produto>();
@@ -166,7 +214,7 @@ public class ProdutoRepository : IProdutoRepository
         return produtos;
     }
 
-    public async Task<IEnumerable<Produto>> TesteSete(string request)
+    public async Task<IEnumerable<Produto>> TesteNove(string request)
     {
         var connectionString = this.GetConnection();
         List<Produto> produtos = new List<Produto>();

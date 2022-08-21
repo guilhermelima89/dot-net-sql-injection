@@ -10,6 +10,8 @@
 
 ### POC abordando conceito de SQL Injection utilizando o dapper.
 
+#
+
 # TesteUm
 
 ```c#
@@ -69,13 +71,34 @@ query.Append($"where id = '{request}'");
 # TesteSeis
 
 ```c#
+var query = $"update Produto set Descricao =  '{request}' WHERE ID = {id}";
+```
+
+- 1'; Insert into Teste (Descricao) Values ('testeSeis') --
+
+# TesteSete
+
+```c#
+var query = @$"update Produto
+                set Descricao =  '{request}'
+                WHERE ID = {id}";
+```
+
+- 1'; Insert into Teste (Descricao) Values ('testeSete') /\*
+- \*/
+
+# TesteOito
+
+- Seguro
+
+```c#
 var query = $"SELECT * FROM Produto where Descricao = @descricao";
 produtos = con.Query<Produto>(query, new { descricao = request }).ToList();
 ```
 
-- Seguro
+# TesteNove
 
-# TesteSete
+- Seguro
 
 ```c#
 var parameters = new DynamicParameters();
@@ -84,5 +107,3 @@ parameters.Add("@descricao", request);
 var query = $"SELECT * FROM Produto where Descricao = @descricao";
 produtos = con.Query<Produto>(query, parameters).ToList();
 ```
-
-- Seguro
