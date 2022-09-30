@@ -14,4 +14,8 @@ public interface IProdutoRepository
     Task TesteSete(string request, string id);
     Task<IEnumerable<Produto>> TesteOito(string request);
     Task<IEnumerable<Produto>> TesteNove(string request);
+    Task<IEnumerable<Produto>> TesteDez(string request);
+    Task<IEnumerable<Produto>> TesteOnze(string request);
+    Task<IEnumerable<Produto>> TesteDoze(string request);
+    Task<IEnumerable<Produto>> TesteTreze(string request);
 }

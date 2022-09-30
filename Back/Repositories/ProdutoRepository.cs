@@ -71,8 +71,8 @@ public class ProdutoRepository : IProdutoRepository
 
     public async Task<IEnumerable<Produto>> TesteTres(string request)
     {
-        var connectionString = this.GetConnection();
-        List<Produto> produtos = new List<Produto>();
+        var connectionString = GetConnection();
+        var produtos = new List<Produto>();
         await using var con = new SqlConnection(connectionString);
 
         try
@@ -239,5 +239,56 @@ public class ProdutoRepository : IProdutoRepository
         }
 
         return produtos;
+    }
+
+    public async Task<IEnumerable<Produto>> TesteDez(string request)
+    {
+        var connectionString = GetConnection();
+        var query = $"SELECT * FROM Produto where Descricao = {request}";
+
+        using (var con = new SqlConnection(connectionString))
+        {
+            var produtos = await con.QueryAsync<Produto>(query);
+            return produtos.ToList();
+        }
+    }
+
+    public async Task<IEnumerable<Produto>> TesteOnze(string request)
+    {
+        var connectionString = GetConnection();
+        var query = $"SELECT * FROM Produto where Descricao = '" + request + "'";
+
+        using (var con = new SqlConnection(connectionString))
+        {
+            var produtos = await con.QueryAsync<Produto>(query);
+            return produtos.ToList();
+        }
+    }
+
+    public async Task<IEnumerable<Produto>> TesteDoze(string request)
+    {
+        var connectionString = GetConnection();
+        var query = $"SELECT * FROM Produto where Descricao = @descricao";
+
+        var parameters = new DynamicParameters();
+        parameters.Add("@descricao", request);
+
+        using (var con = new SqlConnection(connectionString))
+        {
+            var produtos = await con.QueryAsync<Produto>(query, parameters);
+            return produtos.ToList();
+        }
+    }
+
+    public async Task<IEnumerable<Produto>> TesteTreze(string request)
+    {
+        var connectionString = GetConnection();
+        var query = $"SELECT * FROM Produto where Descricao = @descricao";
+
+        using (var con = new SqlConnection(connectionString))
+        {
+            var produtos = await con.QueryAsync<Produto>(query, new { descricao = request });
+            return produtos.ToList();
+        }
     }
 }
