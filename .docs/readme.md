@@ -1,15 +1,32 @@
 # SQL INJECTION
 
-## O que é SQL INJECTION ?
+## O que é ?
 
 - O SQL Injection é uma técnica de ataque baseada na manipulação do código SQL.
+  </br>
+  </br>
 
-## Ferramentas utilizadas
+# Tabelas
 
-- Postman
-- Swagger
+## Produto
 
-# Tabela de LOG
+```SQL
+CREATE TABLE [dbo].[Produto](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Descricao] [varchar](250) NOT NULL,
+	[DataCadastro] [datetime] NOT NULL,
+ CONSTRAINT [PK_Produto] PRIMARY KEY CLUSTERED
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Produto] ADD  CONSTRAINT [DF_Produto_DataCadastro]  DEFAULT (getdate()) FOR [DataCadastro]
+GO
+```
+
+## Log
 
 ```SQL
 CREATE TABLE [dbo].[Log](
@@ -26,6 +43,8 @@ GO
 ALTER TABLE [dbo].[Log] ADD  CONSTRAINT [DF_Log_DataCadastro]  DEFAULT (getdate()) FOR [DataCadastro]
 GO
 ```
+
+#
 
 # Código não seguro
 
@@ -80,7 +99,11 @@ SELECT * FROM Produto where Descricao = '' Insert into Log (Descricao) Values ('
 - '; Insert into Log (Descricao) Values ('LogT') --
 - 1';drop table Log--
 - 1';delete Log--
-- 1';truncate table Log--
+- 1';truncate table Log--\
+
+  </br>
+
+#
 
 # Código seguro
 
